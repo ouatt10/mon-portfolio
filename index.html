@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OUATTARA El Hadj Fetigue - Développeur Web</title>
+    <title>OUATTARA El Hadj Fetigue - Développeur Full Stack</title>
+    <link rel="icon" type="image/png" href="EL HADJ.png">
+    <link rel="shortcut icon" type="image/png" href="EL HADJ.png">
     <style>
         * {
             margin: 0;
@@ -11,68 +13,167 @@
             box-sizing: border-box;
         }
 
-        :root {
+        /* Variables pour les deux thèmes */
+        :root[data-theme="dark"] {
             --primary: #00d4ff;
             --secondary: #7b2cbf;
-            --dark: #0a0e27;
-            --darker: #050816;
-            --light: #e0e7ff;
-            --text-gray: #a0aec0;
+            --bg-main: #050816;
+            --bg-secondary: #0a0e27;
+            --text-primary: #e0e7ff;
+            --text-secondary: #a0aec0;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --card-border: rgba(255, 255, 255, 0.1);
+        }
+
+        :root[data-theme="light"] {
+            --primary: #0099cc;
+            --secondary: #6a1b9a;
+            --bg-main: #f5f7fa;
+            --bg-secondary: #ffffff;
+            --text-primary: #1a202c;
+            --text-secondary: #4a5568;
+            --card-bg: #ffffff;
+            --card-border: rgba(0, 0, 0, 0.1);
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: var(--darker);
-            color: var(--light);
+            background: var(--bg-main);
+            color: var(--text-primary);
             line-height: 1.6;
             overflow-x: hidden;
+            transition: background 0.3s ease, color 0.3s ease;
         }
 
-        /* Navigation */
+        /* Navigation améliorée */
         nav {
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(10, 14, 39, 0.95);
+            background: var(--bg-secondary);
             backdrop-filter: blur(10px);
-            padding: 1.5rem 5%;
+            padding: 1rem 5%;
             z-index: 1000;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
         }
 
-        nav ul {
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-logo img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 8px rgba(0, 212, 255, 0.3));
+        }
+
+        .nav-menu {
             list-style: none;
             display: flex;
-            justify-content: center;
-            gap: 3rem;
-            flex-wrap: wrap;
+            gap: 2rem;
+            align-items: center;
         }
 
-        nav a {
-            color: var(--light);
+        .nav-menu a {
+            color: var(--text-primary);
             text-decoration: none;
             font-weight: 600;
             transition: all 0.3s;
             position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
         }
 
-        nav a:after {
+        .nav-menu a:hover {
+            color: var(--primary);
+            background: var(--card-bg);
+        }
+
+        .nav-menu a.active {
+            color: var(--primary);
+        }
+
+        .nav-menu a.active:after {
             content: '';
             position: absolute;
             bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 3px;
             background: var(--primary);
-            transition: width 0.3s;
+            border-radius: 2px;
         }
 
-        nav a:hover:after {
-            width: 100%;
+        /* Bouton de thème */
+        .theme-toggle {
+            background: var(--card-bg);
+            border: 2px solid var(--card-border);
+            color: var(--text-primary);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: all 0.3s;
         }
 
-        nav a.active:after {
-            width: 100%;
+        .theme-toggle:hover {
+            transform: rotate(180deg);
+            border-color: var(--primary);
+        }
+
+        /* Menu hamburger pour mobile */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-primary);
+            transition: all 0.3s;
+            border-radius: 2px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
         }
 
         /* Hero Section */
@@ -82,7 +183,7 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 2rem;
+            padding: 8rem 2rem 2rem 2rem;
             position: relative;
             overflow: hidden;
         }
@@ -104,14 +205,14 @@
 
         .hero .subtitle {
             font-size: clamp(1.2rem, 3vw, 1.8rem);
-            color: var(--text-gray);
+            color: var(--text-secondary);
             margin-bottom: 2rem;
             animation: fadeInUp 1s ease 0.2s both;
         }
 
         .hero .description {
             font-size: 1.1rem;
-            color: var(--text-gray);
+            color: var(--text-secondary);
             margin-bottom: 2.5rem;
             line-height: 1.8;
             animation: fadeInUp 1s ease 0.4s both;
@@ -140,6 +241,14 @@
             padding: 5rem 5%;
             max-width: 1400px;
             margin: 0 auto;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .section-title {
@@ -174,7 +283,7 @@
 
         .about-text p {
             margin-bottom: 1.5rem;
-            color: var(--text-gray);
+            color: var(--text-secondary);
             font-size: 1.1rem;
         }
 
@@ -205,10 +314,10 @@
         }
 
         .skill-category {
-            background: rgba(255, 255, 255, 0.05);
+            background: var(--card-bg);
             padding: 2rem;
             border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--card-border);
             transition: all 0.3s;
         }
 
@@ -247,7 +356,7 @@
         /* Projets */
         .projects-intro {
             text-align: center;
-            color: var(--text-gray);
+            color: var(--text-secondary);
             font-size: 1.1rem;
             margin-bottom: 3rem;
             max-width: 800px;
@@ -262,10 +371,10 @@
         }
 
         .project-card {
-            background: rgba(255, 255, 255, 0.05);
+            background: var(--card-bg);
             border-radius: 15px;
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--card-border);
             transition: all 0.3s;
         }
 
@@ -303,7 +412,7 @@
         }
 
         .project-content p {
-            color: var(--text-gray);
+            color: var(--text-secondary);
             margin-bottom: 1rem;
         }
 
@@ -345,7 +454,7 @@
         }
 
         .education {
-            background: rgba(255, 255, 255, 0.05);
+            background: var(--card-bg);
             padding: 2.5rem;
             border-radius: 15px;
             border-left: 4px solid var(--primary);
@@ -367,16 +476,16 @@
         .education .degree {
             font-size: 1.3rem;
             margin-bottom: 0.5rem;
-            color: var(--light);
+            color: var(--text-primary);
         }
 
         .education .year {
-            color: var(--text-gray);
+            color: var(--text-secondary);
             font-size: 1.1rem;
         }
 
         .education .details {
-            color: var(--text-gray);
+            color: var(--text-secondary);
             font-size: 1rem;
             margin-top: 0.5rem;
         }
@@ -407,17 +516,17 @@
 
         /* Section CV */
         .cv-section {
-            background: rgba(255, 255, 255, 0.05);
+            background: var(--card-bg);
             padding: 3rem;
             border-radius: 20px;
             text-align: center;
             max-width: 700px;
             margin: 0 auto;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--card-border);
         }
 
         .cv-section p {
-            color: var(--text-gray);
+            color: var(--text-secondary);
             font-size: 1.1rem;
             margin-bottom: 2rem;
             line-height: 1.8;
@@ -455,7 +564,7 @@
 
         .contact-intro {
             text-align: center;
-            color: var(--text-gray);
+            color: var(--text-secondary);
             margin-bottom: 3rem;
             font-size: 1.1rem;
         }
@@ -474,10 +583,10 @@
         }
 
         .contact-item {
-            background: rgba(255, 255, 255, 0.05);
+            background: var(--card-bg);
             padding: 1.5rem;
             border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--card-border);
             transition: all 0.3s;
         }
 
@@ -499,10 +608,10 @@
 
         /* Formulaire de contact */
         .contact-form {
-            background: rgba(255, 255, 255, 0.05);
+            background: var(--card-bg);
             padding: 2rem;
             border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--card-border);
         }
 
         .contact-form h3 {
@@ -518,7 +627,7 @@
 
         .form-group label {
             display: block;
-            color: var(--light);
+            color: var(--text-primary);
             margin-bottom: 0.5rem;
             font-weight: 600;
         }
@@ -527,10 +636,10 @@
         .form-group textarea {
             width: 100%;
             padding: 0.8rem;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: var(--bg-main);
+            border: 1px solid var(--card-border);
             border-radius: 8px;
-            color: var(--light);
+            color: var(--text-primary);
             font-family: inherit;
             font-size: 1rem;
             transition: all 0.3s;
@@ -540,7 +649,6 @@
         .form-group textarea:focus {
             outline: none;
             border-color: var(--primary);
-            background: rgba(255, 255, 255, 0.15);
         }
 
         .form-group textarea {
@@ -598,8 +706,8 @@
         footer {
             text-align: center;
             padding: 2rem;
-            background: var(--dark);
-            color: var(--text-gray);
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
         }
 
         /* Animations */
@@ -627,9 +735,38 @@
 
         /* Responsive */
         @media (max-width: 768px) {
-            nav ul {
-                gap: 1.5rem;
-                font-size: 0.9rem;
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: var(--bg-secondary);
+                flex-direction: column;
+                justify-content: flex-start;
+                padding: 2rem;
+                gap: 1rem;
+                transition: left 0.3s ease;
+                overflow-y: auto;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-menu a {
+                width: 100%;
+                padding: 1rem;
+                justify-content: center;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .theme-toggle {
+                margin-left: auto;
+                margin-right: 1rem;
             }
 
             .about-content {
@@ -651,24 +788,40 @@
     </style>
 </head>
 <body>
-    <!-- Navigation -->
+    <!-- Navigation améliorée -->
     <nav>
-        <ul>
-            <li><a href="#accueil">Accueil</a></li>
-            <li><a href="#apropos">À propos</a></li>
-            <li><a href="#competences">Compétences</a></li>
-            <li><a href="#projets">Projets</a></li>
-            <li><a href="#formation">Formation</a></li>
-            <li><a href="#cv">CV</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="EL HADJ.png" alt="Logo EHF"> OEF
+            </div>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#accueil">🏠 Accueil</a></li>
+                <li><a href="#apropos">👤 À propos</a></li>
+                <li><a href="#competences">💻 Compétences</a></li>
+                <li><a href="#projets">📱 Projets</a></li>
+                <li><a href="#formation">🎓 Formation</a></li>
+                <li><a href="#cv">📄 CV</a></li>
+                <li><a href="#contact">📧 Contact</a></li>
+            </ul>
+
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <span id="themeIcon">🌙</span>
+            </button>
+
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="accueil" class="hero">
+    <section id="accueil" class="hero visible">
         <div class="hero-content">
             <h1>OUATTARA El Hadj Fetigue</h1>
-            <p class="subtitle">Développeur Web Full Stack</p>
+            <p class="subtitle">Développeur Full Stack</p>
             <p class="description">
                 Étudiant passionné en Technologies du Web et Images Numériques, 
                 je crée des expériences digitales modernes et performantes.
@@ -761,10 +914,9 @@
                     <span class="skill-tag">Maya</span>
                     <span class="skill-tag">Canva</span>
                     <span class="skill-tag">Postman</span>
-                    <span class="skill-tag">Visual Studio Code, cursor, code Block...</span>
-                    <span class="skill-tag">Astah Uml</span>
-                    <span class="skill-tag">etc</span>
-                    
+                    <span class="skill-tag">VS Code</span>
+                    <span class="skill-tag">Cursor</span>
+                    <span class="skill-tag">Astah UML</span>
                 </div>
             </div>
         </div>
@@ -843,7 +995,7 @@
         <h2 class="section-title">Formation & Certifications</h2>
         <div class="education-container">
             <div class="education">
-                <h3>Licence enTechnologies du Web et Images Numériques</h3>
+                <h3>Licence en Technologies du Web et Images Numériques</h3>
                 <p class="degree">Développement Web & mobile, Community management</p>
                 <p class="year">2023 - En cours</p>
                 <p class="details">École Supérieure Africaine des TIC (ESATIC)</p>
@@ -856,7 +1008,6 @@
                 <p class="details">Lycée Moderne d'Abobo</p>
             </div>
 
-            <!-- Certifications -->
             <div class="certifications-section">
                 <h3 class="certifications-title">🎓 Certifications Professionnelles</h3>
                 
@@ -864,14 +1015,14 @@
                     <h3>Cisco Networking Essentials</h3>
                     <p class="degree">Fondamentaux des réseaux informatiques</p>
                     <p class="year">Cisco Networking Academy</p>
-                    <p class="details">Certifié CISCO Networking Academy (Cisco Networking Academy – Networking Essentials )</p>
+                    <p class="details">Certifié CISCO Networking Academy (Cisco Networking Academy – Networking Essentials)</p>
                 </div>
 
                 <div class="education">
                     <h3>Certifications Udemy</h3>
                     <p class="degree">Développement Web & Technologies modernes</p>
                     <p class="year">Udemy Learning Platform</p>
-                    <p class="details">Certifié en Développement Web Full Stack – Udemy (NodeJs, HTML/CSS,Javascript,MongoDB,MySQL,Socket IO...)</p>
+                    <p class="details">Certifié en Développement Web Full Stack – Udemy (NodeJs, HTML/CSS, Javascript, MongoDB, MySQL, Socket IO...)</p>
                 </div>
             </div>
         </div>
@@ -900,7 +1051,6 @@
                 N'hésitez pas à me contacter pour discuter de vos projets ou opportunités de collaboration.
             </p>
             <div class="contact-wrapper">
-                <!-- Informations de contact -->
                 <div class="contact-info">
                     <div class="contact-item">
                         <strong>📧 Email</strong><br>
@@ -916,13 +1066,11 @@
                     </div>
                 </div>
 
-                <!-- Formulaire de contact -->
                 <div class="contact-form">
                     <h3>✉️ Envoyez-moi un message</h3>
                     <form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" action="/success.html">
                         <input type="hidden" name="form-name" value="contact">
                         
-                        <!-- Champ anti-spam caché -->
                         <p style="display: none;">
                             <label>Ne pas remplir : <input name="bot-field" /></label>
                         </p>
@@ -962,7 +1110,43 @@
     </footer>
 
     <script>
-        // Smooth scroll
+        // === THEME TOGGLE (Mode Sombre/Clair) ===
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const html = document.documentElement;
+
+        // Charger le thème sauvegardé
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        html.setAttribute('data-theme', savedTheme);
+        themeIcon.textContent = savedTheme === 'dark' ? '🌙' : '☀️';
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            html.setAttribute('data-theme', newTheme);
+            themeIcon.textContent = newTheme === 'dark' ? '🌙' : '☀️';
+            localStorage.setItem('theme', newTheme);
+        });
+
+        // === MENU HAMBURGER MOBILE ===
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Fermer le menu mobile au clic sur un lien
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // === SMOOTH SCROLL ===
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -973,7 +1157,7 @@
             });
         });
 
-        // Active nav on scroll
+        // === ACTIVE NAV ON SCROLL ===
         window.addEventListener('scroll', () => {
             let current = '';
             const sections = document.querySelectorAll('section');
@@ -986,7 +1170,7 @@
                 }
             });
 
-            document.querySelectorAll('nav a').forEach(link => {
+            document.querySelectorAll('.nav-menu a').forEach(link => {
                 link.classList.remove('active');
                 if (link.getAttribute('href').slice(1) === current) {
                     link.classList.add('active');
@@ -994,17 +1178,33 @@
             });
         });
 
-        // Gestion du formulaire de contact
+        // === ANIMATIONS AU SCROLL ===
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observer toutes les sections sauf le hero
+        document.querySelectorAll('section:not(.hero)').forEach(section => {
+            observer.observe(section);
+        });
+
+        // === FORMULAIRE DE CONTACT ===
         const contactForm = document.querySelector('form[name="contact"]');
         const submitBtn = document.querySelector('.submit-btn');
 
         if (contactForm) {
             contactForm.addEventListener('submit', function(e) {
-                // Désactiver le bouton pendant l'envoi
                 submitBtn.disabled = true;
                 submitBtn.textContent = 'Envoi en cours...';
-                
-                // Netlify gère automatiquement l'envoi et la redirection
             });
         }
     </script>
