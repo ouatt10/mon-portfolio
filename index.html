@@ -71,6 +71,10 @@
             width: 100%;
         }
 
+        nav a.active:after {
+            width: 100%;
+        }
+
         /* Hero Section */
         .hero {
             min-height: 100vh;
@@ -91,6 +95,7 @@
         .hero h1 {
             font-size: clamp(2.5rem, 6vw, 5rem);
             background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 1rem;
@@ -240,6 +245,16 @@
         }
 
         /* Projets */
+        .projects-intro {
+            text-align: center;
+            color: var(--text-gray);
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -325,7 +340,7 @@
             display: flex;
             flex-direction: column;
             gap: 2rem;
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
         }
 
@@ -334,6 +349,13 @@
             padding: 2.5rem;
             border-radius: 15px;
             border-left: 4px solid var(--primary);
+            transition: all 0.3s;
+        }
+
+        .education:hover {
+            transform: translateX(10px);
+            border-color: var(--secondary);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
         }
 
         .education h3 {
@@ -357,6 +379,30 @@
             color: var(--text-gray);
             font-size: 1rem;
             margin-top: 0.5rem;
+        }
+
+        .certifications-section {
+            margin-top: 3rem;
+        }
+
+        .certifications-title {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .certifications-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 2px;
         }
 
         /* Section CV */
@@ -403,16 +449,28 @@
 
         /* Contact */
         .contact-content {
-            max-width: 600px;
+            max-width: 800px;
             margin: 0 auto;
+        }
+
+        .contact-intro {
             text-align: center;
+            color: var(--text-gray);
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
         }
 
         .contact-info {
             display: flex;
             flex-direction: column;
             gap: 1.5rem;
-            margin-top: 2rem;
         }
 
         .contact-item {
@@ -439,6 +497,103 @@
             color: var(--secondary);
         }
 
+        /* Formulaire de contact */
+        .contact-form {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .contact-form h3 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--light);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: var(--light);
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.3);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.5);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .form-message {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            display: none;
+            animation: slideIn 0.3s ease;
+            font-weight: 600;
+        }
+
+        .form-message.success {
+            background: rgba(0, 255, 0, 0.1);
+            border: 1px solid rgba(0, 255, 0, 0.3);
+            color: #00ff00;
+        }
+
+        .form-message.error {
+            background: rgba(255, 0, 0, 0.1);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            color: #ff6b6b;
+        }
+
         /* Footer */
         footer {
             text-align: center;
@@ -459,6 +614,17 @@
             }
         }
 
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             nav ul {
@@ -471,6 +637,10 @@
             }
 
             .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-wrapper {
                 grid-template-columns: 1fr;
             }
 
@@ -498,7 +668,7 @@
     <section id="accueil" class="hero">
         <div class="hero-content">
             <h1>OUATTARA El Hadj Fetigue</h1>
-            <p class="subtitle">Développeur Web Full Stack & Designer</p>
+            <p class="subtitle">Développeur Web Full Stack</p>
             <p class="description">
                 Étudiant passionné en Technologies du Web et Images Numériques, 
                 je crée des expériences digitales modernes et performantes.
@@ -539,11 +709,14 @@
             <div class="skill-category">
                 <h3>💻 Langages</h3>
                 <div class="skill-tags">
-                    <span class="skill-tag">HTML</span>
-                    <span class="skill-tag">CSS</span>
+                    <span class="skill-tag">HTML5</span>
+                    <span class="skill-tag">CSS3</span>
+                    <span class="skill-tag">TailwindCSS</span>
                     <span class="skill-tag">JavaScript</span>
                     <span class="skill-tag">PHP</span>
                     <span class="skill-tag">Python</span>
+                    <span class="skill-tag">JAVA</span>
+                    <span class="skill-tag">Dart</span>
                 </div>
             </div>
 
@@ -556,6 +729,10 @@
                     <span class="skill-tag">Laravel</span>
                     <span class="skill-tag">Flutter</span>
                     <span class="skill-tag">Node.js</span>
+                    <span class="skill-tag">Express.js</span>
+                    <span class="skill-tag">Next.js</span>
+                    <span class="skill-tag">Spring Boot</span>
+                    <span class="skill-tag">Bootstrap</span>
                 </div>
             </div>
 
@@ -566,13 +743,15 @@
                     <span class="skill-tag">PostgreSQL</span>
                     <span class="skill-tag">SQL Server</span>
                     <span class="skill-tag">MongoDB</span>
+                    <span class="skill-tag">Firebase</span>
+                    <span class="skill-tag">AWS</span>
                 </div>
             </div>
 
             <div class="skill-category">
                 <h3>🛠️ Outils & Design</h3>
                 <div class="skill-tags">
-                    <span class="skill-tag">Git</span>
+                    <span class="skill-tag">GitHub & GitLab</span>
                     <span class="skill-tag">Docker</span>
                     <span class="skill-tag">Figma</span>
                     <span class="skill-tag">Photoshop</span>
@@ -581,6 +760,11 @@
                     <span class="skill-tag">Premiere Pro</span>
                     <span class="skill-tag">Maya</span>
                     <span class="skill-tag">Canva</span>
+                    <span class="skill-tag">Postman</span>
+                    <span class="skill-tag">Visual Studio Code, cursor, code Block...</span>
+                    <span class="skill-tag">Astah Uml</span>
+                    <span class="skill-tag">etc</span>
+                    
                 </div>
             </div>
         </div>
@@ -589,6 +773,11 @@
     <!-- Projets -->
     <section id="projets">
         <h2 class="section-title">Mes Projets</h2>
+        <p class="projects-intro">
+            Au cours de mon parcours, j'ai participé à de nombreux projets académiques et personnels. 
+            Voici une sélection de mes réalisations les plus significatives qui illustrent mes compétences 
+            en développement web et mobile.
+        </p>
         <div class="projects-grid">
             <div class="project-card">
                 <div class="project-image">
@@ -600,9 +789,12 @@
                     <a href="https://trocscolaire.netlify.app/" target="_blank" class="project-link">🔗 Voir le site →</a>
                     <div class="project-tech">
                         <span class="tech-badge">React.js</span>
+                        <span class="tech-badge">Express.js</span>
                         <span class="tech-badge">Node.js</span>
                         <span class="tech-badge">MongoDB</span>
+                        <span class="tech-badge">TailwindCSS</span>
                         <span class="tech-badge">Netlify</span>
+                        <span class="tech-badge">Render</span>
                     </div>
                 </div>
             </div>
@@ -634,6 +826,8 @@
                     <a href="https://github.com/ouatt10/BREATHGUARD.git" target="_blank" class="project-link">💻 Voir sur GitHub →</a>
                     <div class="project-tech">
                         <span class="tech-badge">React Native</span>
+                        <span class="tech-badge">NodeJs</span>
+                        <span class="tech-badge">MongoDB</span>
                         <span class="tech-badge">Firebase</span>
                         <span class="tech-badge">Python</span>
                         <span class="tech-badge">TensorFlow</span>
@@ -646,11 +840,11 @@
 
     <!-- Formation -->
     <section id="formation">
-        <h2 class="section-title">Formation</h2>
+        <h2 class="section-title">Formation & Certifications</h2>
         <div class="education-container">
             <div class="education">
-                <h3>Licence en Développement Web</h3>
-                <p class="degree">Technologies du Web et Images Numériques</p>
+                <h3>Licence enTechnologies du Web et Images Numériques</h3>
+                <p class="degree">Développement Web & mobile, Community management</p>
                 <p class="year">2023 - En cours</p>
                 <p class="details">École Supérieure Africaine des TIC (ESATIC)</p>
             </div>
@@ -660,6 +854,25 @@
                 <p class="degree">Sciences Expérimentales</p>
                 <p class="year">2022 - 2023</p>
                 <p class="details">Lycée Moderne d'Abobo</p>
+            </div>
+
+            <!-- Certifications -->
+            <div class="certifications-section">
+                <h3 class="certifications-title">🎓 Certifications Professionnelles</h3>
+                
+                <div class="education">
+                    <h3>Cisco Networking Essentials</h3>
+                    <p class="degree">Fondamentaux des réseaux informatiques</p>
+                    <p class="year">Cisco Networking Academy</p>
+                    <p class="details">Certifié CISCO Networking Academy (Cisco Networking Academy – Networking Essentials )</p>
+                </div>
+
+                <div class="education">
+                    <h3>Certifications Udemy</h3>
+                    <p class="degree">Développement Web & Technologies modernes</p>
+                    <p class="year">Udemy Learning Platform</p>
+                    <p class="details">Certifié en Développement Web Full Stack – Udemy (NodeJs, HTML/CSS,Javascript,MongoDB,MySQL,Socket IO...)</p>
+                </div>
             </div>
         </div>
     </section>
@@ -683,21 +896,61 @@
     <section id="contact">
         <h2 class="section-title">Me Contacter</h2>
         <div class="contact-content">
-            <p style="color: var(--text-gray); margin-bottom: 2rem;">
+            <p class="contact-intro">
                 N'hésitez pas à me contacter pour discuter de vos projets ou opportunités de collaboration.
             </p>
-            <div class="contact-info">
-                <div class="contact-item">
-                    <strong>📧 Email</strong><br>
-                    <a href="mailto:elhadjouattara302@gmail.com">elhadjouattara302@gmail.com</a>
+            <div class="contact-wrapper">
+                <!-- Informations de contact -->
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <strong>📧 Email</strong><br>
+                        <a href="mailto:elhadjouattara302@gmail.com">elhadjouattara302@gmail.com</a>
+                    </div>
+                    <div class="contact-item">
+                        <strong>💼 LinkedIn</strong><br>
+                        <a href="https://www.linkedin.com/in/el-hadj-ouattara-a7779b31b" target="_blank">Voir mon profil LinkedIn</a>
+                    </div>
+                    <div class="contact-item">
+                        <strong>💻 GitHub</strong><br>
+                        <a href="https://github.com/ouatt10" target="_blank">Découvrir mes projets GitHub</a>
+                    </div>
                 </div>
-                <div class="contact-item">
-                    <strong>💼 LinkedIn</strong><br>
-                    <a href="https://www.linkedin.com/in/el-hadj-ouattara-a7779b31b" target="_blank">Voir mon profil LinkedIn</a>
-                </div>
-                <div class="contact-item">
-                    <strong>💻 GitHub</strong><br>
-                    <a href="https://github.com/ouatt10" target="_blank">Découvrir mes projets GitHub</a>
+
+                <!-- Formulaire de contact -->
+                <div class="contact-form">
+                    <h3>✉️ Envoyez-moi un message</h3>
+                    <form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" action="/success.html">
+                        <input type="hidden" name="form-name" value="contact">
+                        
+                        <!-- Champ anti-spam caché -->
+                        <p style="display: none;">
+                            <label>Ne pas remplir : <input name="bot-field" /></label>
+                        </p>
+
+                        <div class="form-group">
+                            <label for="name">Nom complet *</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subject">Sujet</label>
+                            <input type="text" id="subject" name="subject">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Message *</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-btn">Envoyer le message</button>
+                        
+                        <div class="form-message" id="formMessage"></div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -740,6 +993,20 @@
                 }
             });
         });
+
+        // Gestion du formulaire de contact
+        const contactForm = document.querySelector('form[name="contact"]');
+        const submitBtn = document.querySelector('.submit-btn');
+
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                // Désactiver le bouton pendant l'envoi
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Envoi en cours...';
+                
+                // Netlify gère automatiquement l'envoi et la redirection
+            });
+        }
     </script>
 </body>
 </html>
